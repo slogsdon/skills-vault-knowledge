@@ -1,3 +1,5 @@
+> **[shane.logsdon.io](https://shane.logsdon.io)** — writing and projects on agentic workflows, web standards, and payments engineering.
+
 # skills-vault-knowledge
 
 Vault knowledge exploration and synthesis skills for Claude Code. 22 skills covering Obsidian access, knowledge graph audits, idea exploration, and weekly synthesis.
