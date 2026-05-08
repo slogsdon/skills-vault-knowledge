@@ -1,0 +1,7 @@
+{
+  "name": "skills-vault-knowledge",
+  "version": "0.1.0",
+  "description": "Vault knowledge exploration and synthesis skills — obsidian access, backlinks, and 20 knowledge-work skills (bloom, challenge, compound, connect, contradict, drift, emerge, expand, ghost, learned, level-up, map, meeting, stranger, trace, vault-index, vault-lint, weekly-learnings, weekly-signals, fix-nested-code-fences).",
+  "author": { "name": "Shane Logsdon" },
+  "license": "MIT"
+}
