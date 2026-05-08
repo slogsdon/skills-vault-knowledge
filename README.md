@@ -1,8 +1,8 @@
 # skills-vault-knowledge
 
-Vault knowledge exploration and synthesis skills for Claude Code.
+Vault knowledge exploration and synthesis skills for Claude Code. 22 skills covering Obsidian access, knowledge graph audits, idea exploration, and weekly synthesis.
 
-Install via the slogsdon-claude-code-config marketplace.
+Install via the [slogsdon-claude-code-config marketplace](https://github.com/slogsdon/claude-code-config).
 
 ## Skills
 
@@ -28,3 +28,7 @@ Install via the slogsdon-claude-code-config marketplace.
 - **weekly-learnings** — Prepares weekly reflection and learning summary
 - **weekly-signals** — Surfaces deferral patterns and flagged items for weekly review
 - **fix-nested-code-fences** — Repairs nested code fence rendering issues
+
+## License
+
+MIT — see [LICENSE](LICENSE).
