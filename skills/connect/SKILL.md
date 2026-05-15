@@ -5,59 +5,24 @@ description: Surface non-obvious cross-references between vault notes — connec
 
 # Skill: /connect [argument]
 
-Delegate to Qwen via the stepped execution protocol. Claude orchestrates; Qwen executes.
+Surface the bridges between two concepts the vault hasn't made explicit yet. The value is in the surprising connections, not the obvious ones.
+
+**Don't:** use this to find existing links — that's `/backlinks`. Don't surface connections already stated in either note.
 
 ## Steps
 
-1. Parse Shane's request and extract the argument/topic (if provided)
-2. Call `mcp__lmstudio-agent__qwen_start` (standalone) or `mcp__plugin_shane-config_lmstudio-agent__qwen_start` (plugin — use whichever is available) with:
-   - `task`: "Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md). Find non-obvious bridges between '[argument]' and other concepts in the vault. What unexpected connections exist? What synthesis hasn't been made yet?"
+1. Parse the argument/topic from Shane's request.
+2. Follow [Qwen Protocol](_lib/qwen-protocol.md) with:
+   - `task`: "Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md). Find non-obvious bridges between '[argument]' and other concepts in the vault. What unexpected connections exist? What synthesis hasn't been made yet? Reject obvious connections — the value is in the surprising ones. Present 3–5 non-obvious connections, each framed as: '[Concept A] connects to [Concept B] because [non-obvious bridge]. The unexplored synthesis is [new insight].'"
    - `skill`: "connect"
-   - `context`: any relevant context from the current conversation
-3. Loop: if `status` is `"running"`, call `mcp__lmstudio-agent__qwen_continue` (or `mcp__plugin_shane-config_lmstudio-agent__qwen_continue` in plugin) with `session_id`; repeat until `status` is `"done"` or `"error"`
-4. Review Qwen's `result`, synthesize if needed, and present to Shane
-5. Ask Shane: "Save this as a Concept page? (yes/no)"
-   - If no: done.
-   - If yes: ask "What's your take on this?" and wait for Shane's verbatim response
-   - Create the Concept page:
-     ```
-     obsidian create name='Concepts/[topic]' content='## Shane'\''s Take\n\n[Shane'\''s words]\n\n## Summary / Key Points / Cross-references\n\n[synthesis output]' silent
-     ```
-   - Commit:
-     ```bash
-     VAULT="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal"
-     git -C "$VAULT" add -A && git -C "$VAULT" commit -m "docs: add Concept page for [topic]"
-     ```
+3. Review Qwen's result, synthesize if needed, and present to Shane.
+4. Follow [Concept Save Protocol](_lib/concept-save.md).
 
-## Task description for Qwen
+## Fallback
 
-Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md).
+If Qwen is unavailable:
 
-Find non-obvious bridges between '[argument]' and other concepts in the vault. What unexpected connections exist? What synthesis hasn't been made yet?
-
-## Fallback (if qwen_start/qwen_continue unavailable)
-
-Execute the skill directly:
-
-1. Run `obsidian search query='[argument]' limit=10` via bash to find notes related to the topic
-2. Read the relevant notes by running `obsidian read file='[note name]'` via bash for each
-3. Search for notes in adjacent and seemingly unrelated domains to cast a wide net
-4. Look for non-obvious connections:
-   - Structural similarities: two ideas that have the same underlying pattern even though the surface topics differ
-   - Causal links: one idea that might explain or predict something in another note
-   - Tensions that illuminate: two ideas that seem to conflict but the conflict reveals something new
-   - Synthesis opportunities: two notes that together imply a third insight neither states
-5. Reject obvious connections — the value is in the surprising ones
-6. Present 3–5 non-obvious connections, each framed as: "[Concept A] connects to [Concept B] because [non-obvious bridge]. The unexplored synthesis is [new insight]."
-7. Ask Shane: "Save this as a Concept page? (yes/no)"
-   - If no: done.
-   - If yes: ask "What's your take on this?" and wait for Shane's verbatim response
-   - Create the Concept page:
-     ```
-     obsidian create name='Concepts/[topic]' content='## Shane'\''s Take\n\n[Shane'\''s words]\n\n## Summary / Key Points / Cross-references\n\n[synthesis output]' silent
-     ```
-   - Commit:
-     ```bash
-     VAULT="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal"
-     git -C "$VAULT" add -A && git -C "$VAULT" commit -m "docs: add Concept page for [topic]"
-     ```
+1. Run `obsidian search query='[argument]' limit=10` via bash and cast a wide net into adjacent domains.
+2. Look for: structural similarities, causal links, tensions that illuminate, synthesis opportunities.
+3. Present 3–5 non-obvious connections in the format above.
+4. Follow [Concept Save Protocol](_lib/concept-save.md).
