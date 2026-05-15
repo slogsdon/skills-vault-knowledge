@@ -1,62 +1,28 @@
 ---
 name: trace
-description: Use when asked to trace the evolution of an idea over time in the vault, or when /trace is invoked.
+description: Map the chronological evolution of an idea across vault notes. Use when /trace is invoked or when Shane asks "how has my thinking on X changed", "when did I first write about X", "trace the evolution of X". Do NOT use to find connections between two separate ideas — that's /connect.
 ---
 
 # Skill: /trace [argument]
 
-Delegate to Qwen via the stepped execution protocol. Claude orchestrates; Qwen executes.
+Map the arc of how Shane's thinking on a topic evolved — not the current position, but the path that led there and the inflection points along the way.
+
+**Don't:** use this for cross-concept bridging — that's `/connect`. Don't present a settled position without showing the inflection points that led there.
 
 ## Steps
 
-1. Parse Shane's request and extract the argument/topic (if provided)
-2. Call `mcp__lmstudio-agent__qwen_start` (standalone) or `mcp__plugin_shane-config_lmstudio-agent__qwen_start` (plugin — use whichever is available) with:
-   - `task`: "Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md). Map the chronological evolution of Shane's thinking about '[argument]' in the vault. Show how the idea developed, shifted, or matured over time."
+1. Parse the argument/topic from Shane's request.
+2. Follow [Qwen Protocol](_lib/qwen-protocol.md) with:
+   - `task`: "Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md). Map the chronological evolution of Shane's thinking about '[argument]'. What was the earliest framing? What shifted, and what triggered each shift? What's the current settled position (if any), or what remains unresolved? Highlight inflection points — moments where thinking meaningfully changed direction."
    - `skill`: "trace"
-   - `context`: any relevant context from the current conversation
-3. Loop: if `status` is `"running"`, call `mcp__lmstudio-agent__qwen_continue` (or `mcp__plugin_shane-config_lmstudio-agent__qwen_continue` in plugin) with `session_id`; repeat until `status` is `"done"` or `"error"`
-4. Review Qwen's `result`, synthesize if needed, and present to Shane
-5. Ask Shane: "Save this as a Concept page? (yes/no)"
-   - If no: done.
-   - If yes: ask "What's your take on this?" and wait for Shane's verbatim response
-   - Create the Concept page:
-     ```
-     obsidian create name='Concepts/[topic]' content='## Shane'\''s Take\n\n[Shane'\''s words]\n\n## Summary / Key Points / Cross-references\n\n[synthesis output]' silent
-     ```
-   - Commit:
-     ```bash
-     VAULT="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal"
-     git -C "$VAULT" add -A && git -C "$VAULT" commit -m "docs: add Concept page for [topic]"
-     ```
+3. Review Qwen's result, synthesize if needed, and present to Shane.
+4. Follow [Concept Save Protocol](_lib/concept-save.md).
 
-## Task description for Qwen
+## Fallback
 
-Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md).
+If Qwen is unavailable:
 
-Map the chronological evolution of Shane's thinking about '[argument]' in the vault. How did the idea develop, shift, or mature over time?
-
-## Fallback (if qwen_start/qwen_continue unavailable)
-
-Execute the skill directly:
-
-1. Run `obsidian search query='[argument]' limit=10` via bash to find notes related to the topic
-2. Read the relevant notes by running `obsidian read file='[note name]'` via bash for each, paying attention to note dates and timestamps
-3. Sort the notes chronologically by creation/modification date
-4. Identify the evolution of thinking:
-   - What was the earliest framing of the idea?
-   - What shifted, and what triggered each shift?
-   - What's the current settled position (if any), or what remains unresolved?
-5. Present a chronological narrative showing how the idea developed, with specific note references and dates
-6. Highlight inflection points — moments where the thinking meaningfully changed direction
-7. Ask Shane: "Save this as a Concept page? (yes/no)"
-   - If no: done.
-   - If yes: ask "What's your take on this?" and wait for Shane's verbatim response
-   - Create the Concept page:
-     ```
-     obsidian create name='Concepts/[topic]' content='## Shane'\''s Take\n\n[Shane'\''s words]\n\n## Summary / Key Points / Cross-references\n\n[synthesis output]' silent
-     ```
-   - Commit:
-     ```bash
-     VAULT="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal"
-     git -C "$VAULT" add -A && git -C "$VAULT" commit -m "docs: add Concept page for [topic]"
-     ```
+1. Run `obsidian search query='[argument]' limit=10` via bash; read notes paying attention to dates.
+2. Sort chronologically. Identify: earliest framing, inflection points, current position.
+3. Present a chronological narrative with specific note references and dates.
+4. Follow [Concept Save Protocol](_lib/concept-save.md).
