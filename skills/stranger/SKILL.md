@@ -5,27 +5,21 @@ description: Build an outside-observer portrait of Shane from vault evidence —
 
 # Skill: /stranger [argument]
 
-Delegate to Qwen via the stepped execution protocol. Claude orchestrates; Qwen executes.
+Build an outside-observer portrait from vault evidence alone — a stranger's perspective with no insider charity, surfacing what a perceptive outsider would conclude.
+
+**Don't:** protect Shane's self-image in the analysis. Don't draw on self-described identity — only what the vault evidence reveals.
 
 ## Steps
 
-1. Parse Shane's request and extract the argument/topic (if provided)
-2. Call `mcp__lmstudio-agent__qwen_start` (standalone) or `mcp__plugin_shane-config_lmstudio-agent__qwen_start` (plugin — use whichever is available) with:
+1. Parse the argument/topic from Shane's request.
+2. Follow [Qwen Protocol](_lib/qwen-protocol.md) with:
    - `task`: "Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md). Build an outside-observer portrait of Shane based on the vault, focusing on '[argument]' or broadly. What would a perceptive stranger conclude about how he thinks?"
    - `skill`: "stranger"
-   - `context`: any relevant context from the current conversation
-3. Loop: if `status` is `"running"`, call `mcp__lmstudio-agent__qwen_continue` (or `mcp__plugin_shane-config_lmstudio-agent__qwen_continue` in plugin) with `session_id`; repeat until `status` is `"done"` or `"error"`
-4. Review Qwen's `result`, synthesize if needed, and present to Shane
+3. Review Qwen's result, synthesize if needed, and present to Shane.
 
-## Task description for Qwen
+## Fallback
 
-Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md).
-
-Build an outside-observer portrait of Shane based on the vault, focusing on '[argument]' or broadly. What would a perceptive stranger conclude about how he thinks?
-
-## Fallback (if qwen_start/qwen_continue unavailable)
-
-Execute the skill directly:
+If Qwen is unavailable:
 
 1. If `[argument]` is provided, run `obsidian search query='[argument]' limit=15` via bash; otherwise run broad topic searches via bash (e.g. `obsidian search query='work' limit=10`, `obsidian search query='ideas' limit=10`, `obsidian search query='journal' limit=10`)
 2. Read 10–15 notes by running `obsidian read file='[note name]'` via bash for each, sampling across different topics, time periods, and note types

@@ -5,27 +5,21 @@ description: Analyze gaps between stated priorities (OKRs, focus statements) and
 
 # Skill: /drift [argument]
 
-Delegate to Qwen via the stepped execution protocol. Claude orchestrates; Qwen executes.
+Surface the gap between Shane's stated intentions and actual behavior — where he's drifting from his own goals and values, with vault evidence for each.
+
+**Don't:** use this for topic pattern analysis — that's /emerge. Don't soften drift findings — this is accountability analysis, not cheerleading.
 
 ## Steps
 
-1. Parse Shane's request and extract the argument/topic (if provided)
-2. Call `mcp__lmstudio-agent__qwen_start` (standalone) or `mcp__plugin_shane-config_lmstudio-agent__qwen_start` (plugin — use whichever is available) with:
+1. Parse the argument/topic from Shane's request.
+2. Follow [Qwen Protocol](_lib/qwen-protocol.md) with:
    - `task`: "Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md), `obsidian read file='Context/accountability'`, `obsidian read file='Context/patterns'`. Analyze the gap between Shane's stated intentions and actual behavior patterns in the vault around '[argument]' (or broadly). Where is he drifting from his own stated values or goals?"
    - `skill`: "drift"
-   - `context`: any relevant context from the current conversation
-3. Loop: if `status` is `"running"`, call `mcp__lmstudio-agent__qwen_continue` (or `mcp__plugin_shane-config_lmstudio-agent__qwen_continue` in plugin) with `session_id`; repeat until `status` is `"done"` or `"error"`
-4. Review Qwen's `result`, synthesize if needed, and present to Shane
+3. Review Qwen's result, synthesize if needed, and present to Shane.
 
-## Task description for Qwen
+## Fallback
 
-Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md), `obsidian read file='Context/accountability'`, `obsidian read file='Context/patterns'`.
-
-Analyze the gap between Shane's stated intentions and actual behavior patterns in the vault around '[argument]' (or broadly). Where is he drifting from his own stated values or goals?
-
-## Fallback (if qwen_start/qwen_continue unavailable)
-
-Execute the skill directly:
+If Qwen is unavailable:
 
 1. Search for stated intentions via bash: `obsidian search query='want to' limit=10`, `obsidian search query='goal' limit=10`, `obsidian search query='intend' limit=10`, `obsidian search query='commit' limit=10`, `obsidian search query='value' limit=10`
 2. Also read `Context/accountability.md` and `Context/patterns.md` by running `obsidian read file='Context/accountability'` and `obsidian read file='Context/patterns'` via bash

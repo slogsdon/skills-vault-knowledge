@@ -1,34 +1,25 @@
 ---
 name: backlinks
-description: Use when asked to audit backlinks or repair the knowledge graph structure, or when /backlinks is invoked.
+description: Use when asked to audit backlinks or repair the knowledge graph structure, or when /backlinks is invoked. Do NOT use for finding conceptual bridges between ideas — use /connect for that.
 ---
 
 # Skill: /backlinks [argument]
 
-Delegate to Qwen via the stepped execution protocol. Claude drives the loop; Qwen executes.
+Audit the vault's backlink structure to surface orphaned notes, dead links, and one-way connections — the value is in finding what the knowledge graph has lost or never built.
+
+**Don't:** use this to find conceptual bridges — that's /connect. Don't auto-fix findings — surface for Shane to act on.
 
 ## Steps
 
-1. Parse Shane's request and extract the argument/topic (if provided)
-2. Call `mcp__lmstudio-agent__qwen_start` (standalone) or `mcp__plugin_shane-config_lmstudio-agent__qwen_start` (plugin — use whichever is available) with:
-   - `task`: (see Task description for Qwen below, substituting `[argument]` if provided)
+1. Parse the argument/topic from Shane's request.
+2. Follow [Qwen Protocol](_lib/qwen-protocol.md) with:
+   - `task`: "Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md), `obsidian backlinks file='Note Name'`. Audit the vault's backlink structure around '[argument]' (or broadly). Find orphaned notes, broken connections, and opportunities to strengthen the knowledge graph."
    - `skill`: "backlinks"
-   - `context`: any relevant context from the current conversation
-3. Parse the JSON response and loop:
-   - `status: "running"` → call `mcp__lmstudio-agent__qwen_continue` (or `mcp__plugin_shane-config_lmstudio-agent__qwen_continue` in plugin) with the `session_id`
-   - `status: "done"` → proceed to step 4
-   - `status: "error"` → surface the error and stop
-4. Review Qwen's `result`, synthesize if needed, and present to Shane
+3. Review Qwen's result, synthesize if needed, and present to Shane.
 
-## Task description for Qwen
+## Fallback
 
-Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md), `obsidian backlinks file='Note Name'`.
-
-Audit the vault's backlink structure around '[argument]' (or broadly). Find orphaned notes, broken connections, and opportunities to strengthen the knowledge graph.
-
-## Fallback (if qwen_start/qwen_continue unavailable)
-
-Execute the skill directly:
+If Qwen is unavailable:
 
 1. If `[argument]` is provided, run `obsidian search query='[argument]' limit=10` via bash; otherwise run broad searches (e.g. `obsidian search query='MOC OR index OR hub' limit=20`) via bash to sample the vault
 2. Read a set of notes by running `obsidian read file='[note name]'` via bash for each — look for `[[wikilinks]]` and `[[note references]]` embedded in them

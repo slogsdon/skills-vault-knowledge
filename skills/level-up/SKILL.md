@@ -5,27 +5,21 @@ description: Assess current proficiency in a domain and recommend specific growt
 
 # Skill: /level-up [argument]
 
-Delegate to Qwen via the stepped execution protocol. Claude orchestrates; Qwen executes.
+Assess Shane's current proficiency in a domain from vault evidence and identify the specific growth edge — not generic advice, but what the vault shows is missing or underdeveloped.
+
+**Don't:** give advice not grounded in vault evidence. Don't produce a generic curriculum — identify the one capability gap that the vault reveals would unlock the most.
 
 ## Steps
 
-1. Parse Shane's request and extract the argument/topic (if provided)
-2. Call `mcp__lmstudio-agent__qwen_start` (standalone) or `mcp__plugin_shane-config_lmstudio-agent__qwen_start` (plugin — use whichever is available) with:
+1. Parse the argument/topic from Shane's request.
+2. Follow [Qwen Protocol](_lib/qwen-protocol.md) with:
    - `task`: "Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md). Assess Shane's current proficiency with '[argument]' based on vault evidence. What's the next growth edge? What specific actions would level him up?"
    - `skill`: "level-up"
-   - `context`: any relevant context from the current conversation
-3. Loop: if `status` is `"running"`, call `mcp__lmstudio-agent__qwen_continue` (or `mcp__plugin_shane-config_lmstudio-agent__qwen_continue` in plugin) with `session_id`; repeat until `status` is `"done"` or `"error"`
-4. Review Qwen's `result`, synthesize if needed, and present to Shane
+3. Review Qwen's result, synthesize if needed, and present to Shane.
 
-## Task description for Qwen
+## Fallback
 
-Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md).
-
-Assess Shane's current proficiency with '[argument]' based on vault evidence. What's the next growth edge? What specific actions would level him up?
-
-## Fallback (if qwen_start/qwen_continue unavailable)
-
-Execute the skill directly:
+If Qwen is unavailable:
 
 1. Run `obsidian search query='[argument]' limit=10` via bash to find notes related to the topic
 2. Read the relevant notes by running `obsidian read file='[note name]'` via bash for each
