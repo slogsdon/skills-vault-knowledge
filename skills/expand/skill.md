@@ -5,7 +5,9 @@ description: Use when asked to expand a stub or sparse note in the Obsidian vaul
 
 # Skill: /expand [note name]
 
-Expand a stub note into a structured document through a targeted interview. The note must already exist in the vault — if it doesn't, create a stub first.
+Expand a stub vault note into a structured document through a targeted interview — questions batched by theme, answers drive structure, unresolved items become open questions.
+
+**Don't:** invoke if the note doesn't exist — create a stub first. Don't invent answers to unresolved questions — carry them forward as open questions in the note.
 
 ## Steps
 

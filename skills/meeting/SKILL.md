@@ -5,7 +5,9 @@ description: Turn a raw meeting / call / 1:1 transcript or notes into a structur
 
 # Skill: /meeting
 
-Process a raw note from the Obsidian Inbox into a structured Meetings note.
+Process a raw Inbox note into a structured Meetings note with key points, actions, and a Person stub — the Inbox item is deleted (or archived) after.
+
+**Don't:** use this for general note-taking — use /log for that. Don't archive instead of deleting unless Shane says so — default is delete.
 
 ## Steps
 

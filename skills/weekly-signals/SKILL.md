@@ -5,7 +5,9 @@ description: Use when /weekly-signals is invoked or during weekly review. Reads 
 
 # Skill: /weekly-signals
 
-Weekly pattern aggregator. Delegate to Qwen; output a paste-ready block.
+Aggregate the week's accountability signals into a paste-ready block — deferral patterns, logging gaps, and OKR alignment — without auto-writing to vault.
+
+**Don't:** write to the Weekly Review automatically — output for Shane to paste manually. Don't skip the inbox check — uncleaned inboxes skew the signal.
 
 ## Steps
 
@@ -17,17 +19,16 @@ Weekly pattern aggregator. Delegate to Qwen; output a paste-ready block.
    - `Context/patterns.md`
    - `Context/accountability.md`
    - All `Daily Notes/[date].md` files for the current week (read each that exists)
-4. Call `mcp__lmstudio-agent__qwen_start` (standalone) or `mcp__plugin_shane-config_lmstudio-agent__qwen_start` (plugin — use whichever is available) with:
+4. Follow [Qwen Protocol](_lib/qwen-protocol.md) with:
    - `task`: "You are Shane's weekly accountability analyst. Review this week's daily notes and patterns.md (provided). Surface: (1) tasks deferred 2+ times this week, (2) any PATTERN ALERT items, (3) logging gaps (days with no session log), (4) OKR alignment score — what % of logged work maps to the 3 active OKRs? Output a markdown block titled '## Accountability Signals' ready to paste into a Weekly Review note. Be honest, not cheerful."
    - `skill`: "weekly-signals"
    - `context`: content of all files concatenated
-5. Loop: if `status` is `"running"`, call `mcp__lmstudio-agent__qwen_continue` (or `mcp__plugin_shane-config_lmstudio-agent__qwen_continue` in plugin) with `session_id`; repeat until `status` is `"done"` or `"error"`
-6. Output Qwen's `result` to Shane — do NOT write to the Weekly Review automatically. Shane pastes it manually.
-7. Offer to explain any pattern or signal in more detail.
+5. Output Qwen's `result` to Shane — do NOT write to the Weekly Review automatically. Shane pastes it manually.
+6. Offer to explain any pattern or signal in more detail.
 
-## Fallback (if qwen_start/qwen_continue unavailable)
+## Fallback (if qwen unavailable)
 
-Execute the skill directly:
+If Qwen is unavailable:
 
 1. **Check inbox** — same as main step 1
 2. Determine the current week's Monday–Sunday date range (YYYY-MM-DD)

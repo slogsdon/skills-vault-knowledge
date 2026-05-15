@@ -5,7 +5,9 @@ description: Use when /vault-lint is invoked or when Shane wants a weekly vault 
 
 # Skill: /vault-lint
 
-Weekly vault health check. Output is actionable — specific things to fix, not a report for its own sake.
+Weekly vault health scan — contradictions, orphans, missing Concept pages, and stale claims — output is a prioritized action list, not a report.
+
+**Don't:** auto-fix anything — surface for Shane to decide. Don't use this for targeted note exploration — that's the obsidian skill.
 
 ## Steps
 

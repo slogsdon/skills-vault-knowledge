@@ -5,7 +5,9 @@ description: Use when a markdown file has nested code fences that break renderin
 
 # Skill: fix-nested-code-fences
 
-Fixes nested code fence collisions in any markdown file.
+When a code block contains inner triple-backtick fences, replace the outer fence with `~~~` — the minimum change that fixes rendering without altering any content.
+
+**Don't:** change inner fences — only the outer fence needs replacing. Don't apply this to tilde fences that are already correct.
 
 ## The Problem
 

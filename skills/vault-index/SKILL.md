@@ -5,7 +5,9 @@ description: Rebuild the vault-index note from current vault state. Use when /va
 
 # Skill: /vault-index
 
-Rebuild `vault-index.md` so it accurately reflects current vault state. The morning skill reads this note to detect what's changed since the last session — if it's stale or absent, morning briefings degrade. Keep it current.
+Rebuild `vault-index.md` from current vault state so the morning skill's overnight delta is accurate — stale or absent index degrades morning briefings.
+
+**Don't:** include Daily Notes in the index — they're temporal logs, not knowledge graph nodes. Don't run this for targeted note lookup — use the obsidian skill instead.
 
 ## Steps
 

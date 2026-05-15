@@ -1,11 +1,14 @@
 ---
 name: obsidian
-description: General-purpose Obsidian vault skill — use this whenever the user wants to do anything with their vault or personal notes. Covers reading notes by name, searching vault content, creating new notes, appending to existing ones, checking backlinks, and working with daily notes. Trigger immediately on phrases like: "look up my note on X", "add this to my vault", "what does my note say about Y", "find notes about Z", "log this to my vault", "update my daily note", "create a note for...", "what links to X", "search my vault for...", "show me what I know about...", "check my notes on...", or any time the user mentions Obsidian, their vault, or personal notes. If the user is asking about something they might have written down, reach for this skill first.
+description: |
+  General-purpose Obsidian vault skill — use this whenever the user wants to do anything with their vault or personal notes. Covers reading notes by name, searching vault content, creating new notes, appending to existing ones, checking backlinks, and working with daily notes. Trigger immediately on phrases like: "look up my note on X", "add this to my vault", "what does my note say about Y", "find notes about Z", "log this to my vault", "update my daily note", "create a note for...", "what links to X", "search my vault for...", "show me what I know about...", "check my notes on...", or any time the user mentions Obsidian, their vault, or personal notes. If the user is asking about something they might have written down, reach for this skill first.
 ---
 
 # Obsidian Vault Skill
 
-Use the `obsidian` CLI to interact with the user's Obsidian vault. The vault is called **Personal**.
+Use the `obsidian` CLI to interact with the Personal vault — read, search, create, append, backlink, and daily note operations — always via bash with single quotes.
+
+**Don't:** use double quotes in obsidian CLI arguments — they silently fail. Don't use `daily:append` — it's unreliable; use `daily:read` to get the note name, then `obsidian append file='<name>'`.
 
 ## CLI reference
 
