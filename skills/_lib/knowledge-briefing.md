@@ -4,11 +4,19 @@ Run these three checks via bash, then format as the block below.
 
 ## New Clippings (last 24h, unprocessed)
 
+Run both of these to find recent Clippings:
+
 ```bash
 obsidian search query='Clippings/' limit=20
 ```
 
-Filter to files modified in the last 24 hours. Check for absence of `#ingested` tag or `## Notes` / `## Key Points` section. Output: list of unprocessed Clipping titles, or "none."
+```bash
+find "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal/Clippings" -name "*.md" -mtime -1 2>/dev/null
+```
+
+Use the `find` results to identify files modified in the last 24 hours. For each file found, run `obsidian read file='[title without .md]'` to check whether it has been processed (look for `#ingested` tag or a `## Notes` or `## Key Points` section). Files without any of those markers are unprocessed.
+
+Output: list of unprocessed Clipping titles, or "none."
 
 ## Open questions from recent /connect or /trace runs
 

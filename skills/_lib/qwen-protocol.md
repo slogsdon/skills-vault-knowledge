@@ -11,9 +11,11 @@ Call `mcp__lmstudio-agent__qwen_start` (standalone) or `mcp__plugin_shane-config
 
 If `status` is `"running"`, call `mcp__lmstudio-agent__qwen_continue` (or `mcp__plugin_shane-config_lmstudio-agent__qwen_continue` in plugin) with `session_id`. Repeat until `status` is `"done"` or `"error"`.
 
+If `status` is `"error"`, surface the `result` field as an error message and stop — do not continue the loop.
+
 ## Vault access (for Qwen task strings)
 
 When Qwen needs vault access, prefix the task string with:
 ```
-Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md).
+Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md), `obsidian append file='Note Name' content='TEXT'`, `obsidian backlinks note='Note Name'`, `obsidian daily:read`, `obsidian daily:append content='TEXT'`.
 ```
