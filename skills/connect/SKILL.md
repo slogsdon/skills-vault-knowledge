@@ -5,7 +5,7 @@ description: Surface non-obvious cross-references between vault notes — connec
 
 # Skill: /connect [argument]
 
-Surface the bridges between two concepts the vault hasn't made explicit yet. The value is in the surprising connections, not the obvious ones.
+Surface the non-obvious bridges between two concepts the vault hasn't linked yet — the value is in connections that surprise, not the ones you'd expect.
 
 **Don't:** use this to find existing links — that's `/backlinks`. Don't surface connections already stated in either note.
 
