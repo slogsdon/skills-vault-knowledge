@@ -2,34 +2,32 @@
 
 # skills-vault-knowledge
 
-Vault knowledge exploration and synthesis skills for Claude Code. 22 skills covering Obsidian access, knowledge graph audits, idea exploration, and weekly synthesis.
+Vault knowledge exploration and synthesis skills for Claude Code. 16 skills covering Obsidian access, knowledge graph audits, source synthesis, and weekly review.
 
 Install via the [slogsdon-claude-code-config marketplace](https://github.com/slogsdon/claude-code-config).
 
 ## Skills
 
 - **obsidian** — General-purpose vault access: read, search, create, append notes
+- **ingest** — Synthesizes a raw source into a schema-conformant Concept page
 - **backlinks** — Audits and repairs vault backlink structure
-- **bloom** — Maps branching questions from a topic
 - **challenge** — Pressure-tests a belief or steelmans an opposing view
-- **compound** — Shows how knowledge has accumulated around a topic
 - **connect** — Finds non-obvious connections between vault concepts
-- **contradict** — Surfaces contradictions or inconsistencies in thinking
-- **drift** — Analyzes gaps between stated intentions and behavior
-- **emerge** — Surfaces hidden patterns and implicit ideas in the vault
-- **expand** — Expands on a topic or idea from the vault
+- **expand** — Expands a stub or sparse note through a targeted interview
 - **ghost** — Writes in Shane's voice
 - **learned** — Transforms vault insights into polished written content
-- **level-up** — Assesses skill proficiency and recommends growth actions
 - **map** — Audits and maps the knowledge graph structure
 - **meeting** — Processes raw meeting/chat notes into clean structured notes
-- **stranger** — Builds an outside-observer portrait from the vault
 - **trace** — Traces the evolution of an idea over time
 - **vault-index** — Generates or updates the vault index
 - **vault-lint** — Lints vault structure and flags issues
 - **weekly-learnings** — Prepares weekly reflection and learning summary
 - **weekly-signals** — Surfaces deferral patterns and flagged items for weekly review
 - **fix-nested-code-fences** — Repairs nested code fence rendering issues
+
+Seven analytical lens skills (bloom, compound, contradict, drift, emerge,
+level-up, stranger) were removed in 0.2.0 and consolidated into a single vault
+note — see [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 

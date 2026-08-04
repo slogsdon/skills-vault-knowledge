@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.3.0 — 2026-08-04
+
+**Added `ingest`** — synthesizes one raw source (Clipping, article, transcript,
+pasted text) into a Concept page conforming to `Context/Vault Schema.md`, then
+registers it in `Inbox/vault-index.md` and `Inbox/vault-log.md`.
+
+It was reviewed for removal alongside the 0.2.0 pruning and kept: the Vault
+Schema contract is live, `Concepts/` holds 52 pages, and nothing else writes
+that format. `learned` produces published content, `capture` is generic durable
+knowledge, `meeting` targets `Meetings/`.
+
+Fixed three stale references in the process — `/inbox-process` → `/inbox-triage`
+(the former was retired with `skills-vault-rituals`), and the index/log paths,
+which live in `Inbox/` rather than the vault root.
+
+README resynced: it had still listed all seven removed lenses and omitted
+`ingest`, `expand`, and `weekly-signals`.
+
 ## 0.2.0 — 2026-08-04
 
 **Removed 7 analytical lens skills:** `bloom`, `compound`, `contradict`,
