@@ -9,7 +9,7 @@ Run this one block — it dates every unprocessed clipping and splits new-since-
 ```bash
 CLIPS="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal/Knowledge/Reference/Clippings"
 CUTOFF=$(date -v-1d +%Y-%m-%d)
-find "$CLIPS" -name '*.md' -print0 | while IFS= read -r -d '' f; do
+find "$CLIPS" -name '*.md' -not -path '*/Archive/*' -print0 | while IFS= read -r -d '' f; do
   grep -qiE '#ingested|^## (Notes|Key Points)' "$f" && continue
   d=$(awk '/^---$/{n++; if(n==2) exit; next} n==1 && /^created:/{sub(/^created: */,""); print $1; exit}' "$f")
   [ -n "$d" ] || d=$(stat -f '%SB' -t '%Y-%m-%d' "$f")
@@ -23,6 +23,7 @@ echo "--- 5 most recent unprocessed ---"; head -5 /tmp/_clips.tsv
 How it decides:
 
 - **Processed** = the file contains an `#ingested` tag or a `## Notes` / `## Key Points` heading (matched case-insensitively — `## Key points` is also in use). Everything else is unprocessed.
+- **Scope** = top-level `Clippings/` only. `Clippings/Archive/` is excluded — those were archived deliberately (junk, hype, superseded) and must not read as backlog.
 - **Date** = the clipping's frontmatter `created:` field, which is what the Web Clipper writes. Files with no frontmatter fall back to filesystem birth time. Do **not** use `-mtime` here: iCloud rewrites mtimes on sync, so nearly every file looks modified in the last 24 hours and the window becomes meaningless.
 
 Output: the new-since-yesterday titles (usually none), plus the backlog count and its 5 most recent entries so the queue stays visible.
