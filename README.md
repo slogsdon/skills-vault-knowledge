@@ -2,13 +2,15 @@
 
 # skills-vault-knowledge
 
-Vault knowledge exploration and synthesis skills for Claude Code. 16 skills covering Obsidian access, knowledge graph audits, source synthesis, and weekly review.
+Vault knowledge exploration and synthesis skills for Claude Code. 18 skills covering Obsidian access, retrieval, source mining, knowledge graph audits, and weekly review.
 
 Install via the [slogsdon-claude-code-config marketplace](https://github.com/slogsdon/claude-code-config).
 
 ## Skills
 
 - **obsidian** — General-purpose vault access: read, search, create, append notes
+- **vault-retrieve** — Answers a question from the vault: generates the query fan-out, reads hits, returns content verbatim
+- **source-mine** — Mines an external source (GitHub, Google, chat history, filesystem) into attributed vault notes
 - **ingest** — Synthesizes a raw source into a schema-conformant Concept page
 - **backlinks** — Audits and repairs vault backlink structure
 - **challenge** — Pressure-tests a belief or steelmans an opposing view

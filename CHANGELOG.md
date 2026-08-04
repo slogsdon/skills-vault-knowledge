@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.4.0 — 2026-08-04
+
+**Added `vault-retrieve`** — takes a topic, generates its own query fan-out,
+reads every hit, and returns the content verbatim with paths.
+
+Vault retrieval was the widest and longest-running pattern in a
+prompt-and-skill audit over 539 sessions: **49 sessions**, active every month
+from April to August, and the only family that never went quiet. It was always
+hand-written — the prompt supplied the search commands, the folder paths, and
+the note names, because no skill carried them. Meanwhile the transcripts show
+**3,226 raw `obsidian` CLI calls**. The capability was never missing; the
+queries were.
+
+**Added `source-mine`** — mines one external source (GitHub, Google, chat
+history, local filesystem, the vault itself) into attributed notes. Derived
+from the 2026-04-08 → 04-18 runs that built the original knowledge graph, each
+of which was written from scratch.
+
+**Added two `_lib` references:**
+- `vault-map.md` — folder layout, note counts, and query heuristics. This is
+  the payload of `vault-retrieve`; hand-written prompts kept re-supplying it.
+- `source-recipes.md` — per-source endpoints, extraction targets, and pitfalls.
+
 ## 0.3.0 — 2026-08-04
 
 **Added `ingest`** — synthesizes one raw source (Clipping, article, transcript,
