@@ -2,21 +2,30 @@
 
 Run these three checks via bash, then format as the block below.
 
-## New Clippings (last 24h, unprocessed)
+## New Clippings (unprocessed)
 
-Run both of these to find recent Clippings:
-
-```bash
-obsidian search query='Clippings/' limit=20
-```
+Run this one block — it dates every unprocessed clipping and splits new-since-yesterday from the standing backlog:
 
 ```bash
-find "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal/Knowledge/Reference/Clippings" -name "*.md" -mtime -1 2>/dev/null
+CLIPS="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal/Knowledge/Reference/Clippings"
+CUTOFF=$(date -v-1d +%Y-%m-%d)
+find "$CLIPS" -name '*.md' -print0 | while IFS= read -r -d '' f; do
+  grep -qiE '#ingested|^## (Notes|Key Points)' "$f" && continue
+  d=$(awk '/^---$/{n++; if(n==2) exit; next} n==1 && /^created:/{sub(/^created: */,""); print $1; exit}' "$f")
+  [ -n "$d" ] || d=$(stat -f '%SB' -t '%Y-%m-%d' "$f")
+  printf '%s\t%s\n' "$d" "$(basename "$f" .md)"
+done | sort -r > /tmp/_clips.tsv
+echo "BACKLOG: $(wc -l < /tmp/_clips.tsv | tr -d ' ') unprocessed"
+echo "NEW since $CUTOFF:"; awk -F'\t' -v c="$CUTOFF" '$1>=c' /tmp/_clips.tsv
+echo "--- 5 most recent unprocessed ---"; head -5 /tmp/_clips.tsv
 ```
 
-Use the `find` results to identify files modified in the last 24 hours. For each file found, run `obsidian read file='[title without .md]'` to check whether it has been processed (look for an `#ingested` tag or a `## Notes` / `## Key Points` section — match headings case-insensitively; `## Key points` is also in use). Files without any of those markers are unprocessed.
+How it decides:
 
-Output: list of unprocessed Clipping titles, or "none."
+- **Processed** = the file contains an `#ingested` tag or a `## Notes` / `## Key Points` heading (matched case-insensitively — `## Key points` is also in use). Everything else is unprocessed.
+- **Date** = the clipping's frontmatter `created:` field, which is what the Web Clipper writes. Files with no frontmatter fall back to filesystem birth time. Do **not** use `-mtime` here: iCloud rewrites mtimes on sync, so nearly every file looks modified in the last 24 hours and the window becomes meaningless.
+
+Output: the new-since-yesterday titles (usually none), plus the backlog count and its 5 most recent entries so the queue stays visible.
 
 ## Open questions from recent /connect or /trace runs
 
@@ -38,7 +47,7 @@ Compare to the snapshot in yesterday's `## Knowledge Briefing` section. Surface 
 ## Format
 
 ```
-**New Clippings (unprocessed):** [list or "none"]
+**New Clippings:** [new-since-yesterday titles or "none"] — backlog: [N] unprocessed
 **Open questions:** [list or "none"]
 **Vault delta:** [summary or "no changes"]
 ```
