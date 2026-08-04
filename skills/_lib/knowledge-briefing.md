@@ -11,10 +11,10 @@ obsidian search query='Clippings/' limit=20
 ```
 
 ```bash
-find "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal/Clippings" -name "*.md" -mtime -1 2>/dev/null
+find "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal/Knowledge/Reference/Clippings" -name "*.md" -mtime -1 2>/dev/null
 ```
 
-Use the `find` results to identify files modified in the last 24 hours. For each file found, run `obsidian read file='[title without .md]'` to check whether it has been processed (look for `#ingested` tag or a `## Notes` or `## Key Points` section). Files without any of those markers are unprocessed.
+Use the `find` results to identify files modified in the last 24 hours. For each file found, run `obsidian read file='[title without .md]'` to check whether it has been processed (look for an `#ingested` tag or a `## Notes` / `## Key Points` section — match headings case-insensitively; `## Key points` is also in use). Files without any of those markers are unprocessed.
 
 Output: list of unprocessed Clipping titles, or "none."
 
