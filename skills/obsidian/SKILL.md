@@ -58,6 +58,7 @@ Rules:
 3. **Verify by exact path, not `read name=`.** To confirm a write landed, check the file at its known path (`wc -l "$VAULT/Note.md"`) — don't trust `obsidian read name=`, which may show the active file.
 4. **There is no `--help`.** `obsidian create --help` (or any unknown args) creates a stray `Untitled.md`. Use `obsidian help` for usage. Remove an accidental stray by its exact path.
 5. **Bracket destructive ops with `git status`.** Run `git -C "$VAULT" status --porcelain` before and after, so an unintended deletion shows up immediately as a `D` line you can revert.
+6. **`create ... overwrite` is destructive — transcribe, don't regenerate.** The CLI has no in-place edit, so changing one section means rewriting the whole note. Build the new content from a fresh `read path=`, not from what you remember reading, then `git -C "$VAULT" diff` and revert every change outside the requested scope before committing. Regenerating from context silently rewords untouched lines and drops trailing newlines; on a 200-line note that ships.
 
 ## Interpreting requests
 
