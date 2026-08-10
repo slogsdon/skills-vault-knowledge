@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.1 — 2026-08-09
+
+**`obsidian` Safety gains rule 4 — `create ... overwrite` is destructive.**
+The CLI has no in-place edit, so changing one section means rewriting the
+whole note. Build the replacement from a fresh `read path=`, not from what
+you remember reading, then `git diff` that exact path and revert everything
+outside the requested scope before committing. Regenerating from context
+silently rewords untouched lines and drops trailing newlines.
+
 ## 0.4.0 — 2026-08-04
 
 **Added `vault-retrieve`** — takes a topic, generates its own query fan-out,
