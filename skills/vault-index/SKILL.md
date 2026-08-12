@@ -47,7 +47,7 @@ Rebuild `vault-index.md` from current vault state so the morning skill's overnig
 7. Commit the change:
    ```bash
    VAULT="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal"
-   git -C "$VAULT" add -A && git -C "$VAULT" commit -m "docs: rebuild vault-index [YYYY-MM-DD]"
+   git -C "$VAULT" add '<the note paths you wrote>' && git -C "$VAULT" commit -m "docs: rebuild vault-index [YYYY-MM-DD]"
    ```
 
 8. Report what changed: counts per section, and anything flagged in the diff.

@@ -101,7 +101,7 @@ After any `create` or `append` operation, commit the change:
 
 ```bash
 VAULT="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal"
-git -C "$VAULT" add -A && git -C "$VAULT" commit -m "docs: [brief description of what was written]"
+git -C "$VAULT" add '<the note paths you wrote>' && git -C "$VAULT" commit -m "docs: [brief description of what was written]"
 ```
 
 Use conventional commit style. Examples:

@@ -10,5 +10,5 @@
 5. Commit:
    ```bash
    VAULT="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal"
-   git -C "$VAULT" add -A && git -C "$VAULT" commit -m "docs: add Concept page for [topic]"
+   git -C "$VAULT" add '<the note paths you wrote>' && git -C "$VAULT" commit -m "docs: add Concept page for [topic]"
    ```

@@ -73,7 +73,7 @@ Process a raw Inbox note into a structured Meetings note with key points, action
 6. **Commit vault changes**
    ```bash
    VAULT="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal"
-   git -C "$VAULT" add -A && git -C "$VAULT" commit -m "docs: process meeting note [filename]"
+   git -C "$VAULT" add '<the note paths you wrote>' && git -C "$VAULT" commit -m "docs: process meeting note [filename]"
    ```
 
 7. **Confirm**

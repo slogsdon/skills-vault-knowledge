@@ -28,7 +28,7 @@ Turn an account, corpus, or directory you already own into attributed vault note
 7. **Commit the vault** once at the end, not per note:
    ```bash
    VAULT="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal"
-   git -C "$VAULT" add -A && git -C "$VAULT" commit -m "docs: mine <source> → N notes"
+   git -C "$VAULT" add '<the note paths you wrote>' && git -C "$VAULT" commit -m "docs: mine <source> → N notes"
    ```
 
 ## Output
