@@ -12,7 +12,7 @@ Steelman the strongest opposition to a belief using vault evidence — the value
 ## Steps
 
 1. Parse the argument/topic from Shane's request.
-2. Follow [Qwen Protocol](_lib/qwen-protocol.md) with:
+2. Follow [Qwen Protocol](../_lib/qwen-protocol.md) with:
    - `task`: "Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md). Steelman the strongest opposition to '[argument]'. Identify the most vulnerable assumptions, surface counterevidence from the vault, and pressure-test the position rigorously."
    - `skill`: "challenge"
 3. Review Qwen's result, synthesize if needed, and present to Shane.

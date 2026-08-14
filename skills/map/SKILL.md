@@ -12,7 +12,7 @@ Audit the structural health of the knowledge graph — what's well-connected, or
 ## Steps
 
 1. Parse the argument/topic from Shane's request.
-2. Follow [Qwen Protocol](_lib/qwen-protocol.md) with:
+2. Follow [Qwen Protocol](../_lib/qwen-protocol.md) with:
    - `task`: "Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md), `obsidian backlinks file='Note Name'`. Audit the structure and health of the knowledge graph around '[argument]' (or the full vault). What's well-connected, what's orphaned, what's missing?"
    - `skill`: "map"
 3. Review Qwen's result, synthesize if needed, and present to Shane.

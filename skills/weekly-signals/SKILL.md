@@ -19,7 +19,7 @@ Aggregate the week's accountability signals into a paste-ready block — deferra
    - `Context/patterns.md`
    - `Context/accountability.md`
    - All `Daily Notes/[date].md` files for the current week (read each that exists)
-4. Follow [Qwen Protocol](_lib/qwen-protocol.md) with:
+4. Follow [Qwen Protocol](../_lib/qwen-protocol.md) with:
    - `task`: "You are Shane's weekly accountability analyst. Review this week's daily notes and patterns.md (provided). Surface: (1) tasks deferred 2+ times this week, (2) any PATTERN ALERT items, (3) logging gaps (days with no session log), (4) OKR alignment score — what % of logged work maps to the 3 active OKRs? Output a markdown block titled '## Accountability Signals' ready to paste into a Weekly Review note. Be honest, not cheerful."
    - `skill`: "weekly-signals"
    - `context`: content of all files concatenated

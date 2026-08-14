@@ -12,7 +12,7 @@ Transform vault insights into a polished written piece — blog post, essay, or 
 ## Steps
 
 1. Parse the argument/topic from Shane's request.
-2. Follow [Qwen Protocol](_lib/qwen-protocol.md) with:
+2. Follow [Qwen Protocol](../_lib/qwen-protocol.md) with:
    - `task`: "Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md). Transform Shane's vault insights about '[argument]' into a polished written piece — a blog post, essay, or reflection. Use his authentic voice."
    - `skill`: "learned"
 3. Review Qwen's result, synthesize if needed, and present to Shane.

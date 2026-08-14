@@ -31,7 +31,7 @@ Every Concept page MUST have, in order:
 
 1. Read `Context/Vault Schema.md` (the governing contract) and resolve the `source`.
 2. Capture **Shane's Take** first — ask Shane for his angle in one or two lines, or lift his verbatim words if already present. Never synthesize over an empty Take.
-3. Follow [Qwen Protocol](_lib/qwen-protocol.md) with:
+3. Follow [Qwen Protocol](../_lib/qwen-protocol.md) with:
    - `task`: "Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md), `obsidian create name='Name' content='...'`. Synthesize the source '[source]' into a Concepts page following the four-section format (Shane's Take / Summary / Key Points / Cross-references). Search existing Concepts and add bidirectional [[wikilinks]]."
    - `skill`: "ingest"
 4. Decide create vs. update by searching `Concepts/` for an existing page on this concept.

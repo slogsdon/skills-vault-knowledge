@@ -12,7 +12,7 @@ Write content in Shane's authentic voice by grounding in his vault's vocabulary 
 ## Steps
 
 1. Parse the argument/topic from Shane's request.
-2. Follow [Qwen Protocol](_lib/qwen-protocol.md) with:
+2. Follow [Qwen Protocol](../_lib/qwen-protocol.md) with:
    - `task`: "Vault access (bash only, no MCP tools): `obsidian search query='TERM' limit=10`, `obsidian read file='Note Name'` (no .md). Answer the question or topic '[argument]' in Shane's authentic voice. Use the Ghost Writer Context file and vault notes to mirror his vocabulary, reasoning style, and tone. Produce content as Shane would write it."
    - `skill`: "ghost"
 3. Review Qwen's result, synthesize if needed, and present to Shane.

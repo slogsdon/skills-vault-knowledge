@@ -12,7 +12,7 @@ Synthesize the week's vault additions into a written reflection — key learning
 ## Steps
 
 1. Parse the argument/topic from Shane's request.
-2. Follow [Qwen Protocol](_lib/qwen-protocol.md) with:
+2. Follow [Qwen Protocol](../_lib/qwen-protocol.md) with:
    - `task`: "Synthesize this week's vault additions and highlights into a meaningful weekly reflection or email update. What were the key learnings, themes, and open questions?"
    - `skill`: "weekly-learnings"
 3. Review Qwen's result, synthesize if needed, and present to Shane.
