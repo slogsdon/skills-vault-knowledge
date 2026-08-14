@@ -1,7 +1,9 @@
 {
   "name": "skills-vault-knowledge",
-  "version": "0.4.2",
-  "description": "Vault knowledge exploration and synthesis skills — obsidian access, vault-retrieve, source-mine, ingest, and knowledge-work skills for connecting, tracing, and maintaining the vault graph.",
-  "author": { "name": "Shane Logsdon" },
+  "version": "0.4.3",
+  "description": "Vault knowledge exploration and synthesis skills \u2014 obsidian access, vault-retrieve, source-mine, ingest, and knowledge-work skills for connecting, tracing, and maintaining the vault graph.",
+  "author": {
+    "name": "Shane Logsdon"
+  },
   "license": "MIT"
 }
