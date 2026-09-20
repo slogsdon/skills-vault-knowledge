@@ -7,7 +7,7 @@ description: Turn a vault insight or pattern into polished written content — b
 
 Transform vault insights into a polished written piece — blog post, essay, or reflection — in Shane's voice, grounded in specific vault material, not a bullet dump.
 
-**Don't:** produce a bullet list of insights — write narrative prose. Don't start with the most recent note — lead with the most surprising or hard-won insight.
+**Don't:** produce a bullet list of insights — write narrative prose. Don't start with the most recent note — lead with the most surprising or hard-won insight. Don't invent grounding: `Profiles/voice.md` is authoritative for voice and its rule binds here — *"The voice is portable. The thinking isn't."* If the vault holds no material for a claim, leave `[TK: your question]` in the draft rather than writing a plausible specific.
 
 ## Steps
 
@@ -28,5 +28,6 @@ If Qwen is unavailable:
    - Use first-person, direct prose (not listicles unless the content demands it)
    - Lead with the most surprising or hard-won insight
    - Build a narrative arc: what changed, what was learned, why it matters
-   - End with an open question or implication
-5. Present the piece to Shane
+   - Land the ending: close with a punch that restates the thesis in compressed form. Do not summarise what was just said, and do not add an open question, a motivational close, or a tagged-on CTA.
+5. Report every `[TK]` you left, and name which parts came from vault notes versus which you wrote. Never invent the grounding detail.
+6. Present the piece to Shane
